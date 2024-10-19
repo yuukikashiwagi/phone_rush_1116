@@ -243,7 +243,17 @@ function collision(){
 function animate(){
     const animationId = requestAnimationFrame(animate)
 
-    // 追加 Mixer
+    // Mixer
+    // ここに追加
+
+    // 移動関数の実行
+    // ここに追加
+
+    // ジャンプ関数の実行
+    // ここに追加
+
+    // 衝突判定関数の実行
+    // ここに追加
 
     renderer.render(scene, camera);
 }
