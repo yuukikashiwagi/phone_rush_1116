@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then((state) => {
                     if (state === 'granted') {
                         window.location.href = "./race.html";
-                        // alert('Permission granted for DeviceOrientationEvent');
                     } else {
 
                         alert('Permission not granted for DeviceOrientationEvent');
