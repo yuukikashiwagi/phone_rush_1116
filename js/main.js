@@ -98,10 +98,14 @@ const textureUrls = [
 
 // 読み込むGLBモデルのパス
 const glbUrls = [
-    'models/player',// プレイヤー
+    'models/player.glb',// プレイヤー
     'models/houses.glb',// 周りの建物
     'models/phone.glb', // スマホ
 ];
+
+// エリアで用いられる 3D モデルと写真のダウンロード
+const textureloader = new TextureLoader();
+const glbloader = new GLTFLoader();
 
 // プレイヤーの描写
 // ここに記述
@@ -190,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 })
 
-// プレイヤーの左右移動
+// プレイヤーの移動
 function move(){
     // ここに追加
 }
@@ -223,9 +227,7 @@ function collision(){
     if (goal){
         goalBoundingBox = new Box3().setFromObject(goal);
         if (playerBoundingBox.intersectsBox(goalBoundingBox)) { 
-            isGoal = true;     
             console.log('ゴール');     
-            localStorage.setItem('isGoal', isGoal);
             window.location.href = "./index.html";
         }
     }
