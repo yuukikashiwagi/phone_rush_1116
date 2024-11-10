@@ -93,7 +93,7 @@ function iosOrAndrooid(aX, aY, aZ) {
 // texture 内に保存されている jpg のパス
 const textureUrls = [
   "textures/ground.jpg", // 道
-  "textures/goal.jpg", // ゴールテープ
+  "textures/goal.jpg", // ゴール
 ];
 
 // 読み込む GLB モデルのパス
