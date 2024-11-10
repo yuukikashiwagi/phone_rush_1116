@@ -151,7 +151,7 @@ textureloader.load(textureUrls[0], function (texture) {
 	console.error(error);
 } );
 
-// ゴールテープの描写
+// ゴールの描写
 // ここに記述
 
 // センサーの値の読み取り
@@ -223,7 +223,7 @@ function collision(){
     // スマホとの衝突 
     // ここに追加
 
-    // ゴールテープとの衝突
+    // ゴールとの衝突
     if (goal){
         goalBoundingBox = new Box3().setFromObject(goal);
         if (playerBoundingBox.intersectsBox(goalBoundingBox)) { 
@@ -264,3 +264,4 @@ window.addEventListener('resize', () => {
 });
 
 animate();
+
