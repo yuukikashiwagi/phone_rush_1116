@@ -30,6 +30,9 @@ let isOnce = false;
 let ios = true;
 
 // プレイヤーの変数定数を宣言
+let geometry;
+let sphereMaterial;
+let model;
 let player;
 let playerBox;
 let playerBoundingBox;
@@ -56,7 +59,7 @@ let phone_list = [];
 let enemy_list = [];
 
 // シーン
-var scene = new Scene();
+const scene = new Scene();
 // カメラ
 const camera = new PerspectiveCamera(
   90,
@@ -114,9 +117,9 @@ const glbloader = new GLTFLoader();
 glbloader.load(
   glbUrls[1],
   function (gltf) {
-    for (var i = -40; i <= 40; i++) {
+    for (let i = -40; i <= 40; i++) {
       if (i !== 0) {
-        var model = gltf.scene.clone();
+        model = gltf.scene.clone();
         model.rotation.set(0, (Math.PI / 2) * Math.sign(i), 0);
         model.position.set(-14 * Math.sign(i), 0, 20 - 10 * Math.abs(i));
         scene.add(model);
@@ -133,9 +136,9 @@ glbloader.load(
 // ここに記述
 
 // 障害物の描画
-for (var g = 1; g < 12; g++) {
-  const groundGeometry = new ConeGeometry(1, 4, 32);
-  var sphereMaterial = new MeshPhongMaterial({ color: 0xff0000 });
+for (let g = 1; g < 12; g++) {
+  geometry = new ConeGeometry(1, 4, 32);
+  sphereMaterial = new MeshPhongMaterial({ color: 0xff0000 });
   const model = new Mesh(groundGeometry, sphereMaterial);
   const randomIndex = Math.floor(Math.random() * 3);
   model.position.set(course[randomIndex], 2, -15 * (g + 1));
@@ -147,8 +150,8 @@ for (var g = 1; g < 12; g++) {
 textureloader.load(
   textureUrls[0],
   function (texture) {
-    const groundGeometry = new BoxGeometry(24, 0.5, 400);
-    var sphereMaterial = new MeshPhongMaterial();
+    geometry = new BoxGeometry(24, 0.5, 400);
+    sphereMaterial = new MeshPhongMaterial();
     sphereMaterial.map = texture;
     const ground = new Mesh(groundGeometry, sphereMaterial);
     ground.position.set(0, -0.3, -180);
@@ -188,13 +191,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // ここに追加
 
   // 一定時間ごとに
-  var graphtimer = window.setInterval(() => {
+  let graphtimer = window.setInterval(() => {
     // ここに追加
   }, 33);
 
   // 描画する関数
   function displayData() {
-    var result = document.getElementById("result");
+    let result = document.getElementById("result");
     result.innerHTML =
       "alpha: " +
       alpha.toFixed(2) +
@@ -232,9 +235,9 @@ function collision() {
   box_X = 0;
   box_Y = 0;
   box_Z = 0; // サイズが合うように変えてみましょう。
-  var geometry = new BoxGeometry(box_X, box_Y, box_Z);
-  const material = new MeshPhongMaterial({ color: 0xff0000 });
-  playerBox = new Mesh(geometry, material);
+  geometry = new BoxGeometry(box_X, box_Y, box_Z);
+  sphereMaterial = new MeshPhongMaterial({ color: 0xff0000 });
+  playerBox = new Mesh(geometry, sphereMaterial);
   playerBox.position.set(
     player.position.x,
     player.position.y + box_Y,
