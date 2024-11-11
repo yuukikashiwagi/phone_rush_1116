@@ -139,7 +139,7 @@ glbloader.load(
 for (let g = 1; g < 12; g++) {
   geometry = new ConeGeometry(1, 4, 32);
   sphereMaterial = new MeshPhongMaterial({ color: 0xff0000 });
-  const model = new Mesh(groundGeometry, sphereMaterial);
+  const model = new Mesh(geometry, sphereMaterial);
   const randomIndex = Math.floor(Math.random() * 3);
   model.position.set(course[randomIndex], 2, -15 * (g + 1));
   enemy_list.push(model);
@@ -153,7 +153,7 @@ textureloader.load(
     geometry = new BoxGeometry(24, 0.5, 400);
     sphereMaterial = new MeshPhongMaterial();
     sphereMaterial.map = texture;
-    const ground = new Mesh(groundGeometry, sphereMaterial);
+    const ground = new Mesh(geometry, sphereMaterial);
     ground.position.set(0, -0.3, -180);
     ground.receiveShadow = true;
     scene.add(ground);

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    var sensorBtn = document.getElementById("sensor_permission");
+    let sensorBtn = document.getElementById("sensor_permission");
     sensorBtn.addEventListener("click", () => {
         if (window.DeviceOrientationEvent && window.DeviceOrientationEvent.requestPermission) {
             // 権限付与文の追加
