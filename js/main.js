@@ -174,10 +174,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 加速度センサの値の取得
   if (ios) {
-    // iosの時
+    // iOS の時
     // ここに追加
   } else {
-    // androidの時
+    // android の時
     // ここに追加
   }
 
@@ -245,8 +245,8 @@ function collision() {
   );
   playerBox.updateWorldMatrix(true, true);
   const playerBoundingBox = new Box3().setFromObject(playerBox);
-  const playerHelper = new Box3Helper(playerBoundingBox, 0xff0000);
-  scene.add(playerHelper);
+  const helper = new Box3Helper(playerBoundingBox, 0xff0000);
+  scene.add(helper);
 
   // 障害物との衝突
   // ここに追加
