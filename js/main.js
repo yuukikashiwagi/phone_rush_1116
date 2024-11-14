@@ -239,7 +239,7 @@ function collision() {
   playerBox = new Mesh(geometry, sphereMaterial);
   playerBox.position.set(
     player.position.x,
-    player.position.y + box_Y,
+    player.position.y + box_Y / 2,
     player.position.z
   );
   playerBox.updateWorldMatrix(true, true);
