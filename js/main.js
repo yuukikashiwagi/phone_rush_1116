@@ -36,7 +36,6 @@ let model;
 let helper;
 let player;
 let playerBox;
-let playerBoundingBox;
 let goalBoundingBox;
 let player_v_y = 0;
 const initial_velocity = 0.8;
