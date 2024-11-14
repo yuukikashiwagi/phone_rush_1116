@@ -1,17 +1,17 @@
 import {
-  Scene,
-  PerspectiveCamera,
-  WebGLRenderer,
-  DirectionalLight,
-  TextureLoader,
   AnimationMixer,
-  ConeGeometry,
-  MeshPhongMaterial,
-  Mesh,
-  BoxGeometry,
   Box3,
-  Vector3,
   Box3Helper,
+  BoxGeometry,
+  ConeGeometry,
+  DirectionalLight,
+  Mesh,
+  MeshPhongMaterial,
+  PerspectiveCamera,
+  Scene,
+  TextureLoader,
+  Vector3,
+  WebGLRenderer,
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "loaders";
