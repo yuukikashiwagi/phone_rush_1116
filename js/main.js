@@ -11,7 +11,7 @@ import {
   Scene,
   TextureLoader,
   Vector3,
-  WebGLRenderer,
+  WebGLRenderer
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "loaders";
@@ -75,7 +75,7 @@ camera.position.set(0, 4, 10);
 // レンダラー
 const renderer = new WebGLRenderer({
   alpha: true,
-  antialias: true,
+  antialias: true
 });
 renderer.shadowMap.enabled = true;
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -99,14 +99,14 @@ function iosOrAndrooid(aX, aY, aZ) {
 // texture 内に保存されている jpg のパス
 const textureUrls = [
   "textures/ground.jpg", // 道
-  "textures/goal.jpg", // ゴール
+  "textures/goal.jpg" // ゴール
 ];
 
 // 読み込む GLB モデルのパス
 const glbUrls = [
-  "models/player.glb", // プレイヤー
+  "models/player_spare.glb", // プレイヤー
   "models/houses.glb", // 周りの建物
-  "models/phone.glb", // スマホ
+  "models/phone.glb" // スマホ
 ];
 
 // エリアで用いられる 3D モデルと写真のダウンロード
@@ -114,7 +114,29 @@ const textureloader = new TextureLoader();
 const glbloader = new GLTFLoader();
 
 // プレイヤーの描画
-// ここに記述
+glbloader.load(
+  glbUrls[0],
+  function (gltf) {
+    player = gltf.scene;
+    player.scale.set(3, 2, 3);
+    player.rotation.set(0, Math.PI, 0);
+    player.position.set(0, 0, 0);
+    mixer = new AnimationMixer(player); // 解説 1
+    const runningAction = gltf.animations.find(
+      (animation) => animation.name === "running"
+    ); // 解説 2
+    if (runningAction) {
+      mixer.clipAction(runningAction).play(); // 解説 3
+    } else {
+      console.warn("Running animation not found in the model.");
+    }
+    scene.add(player);
+  },
+  undefined,
+  function (error) {
+    console.error(error);
+  }
+);
 
 // 建物の描画
 glbloader.load(
@@ -136,7 +158,24 @@ glbloader.load(
 );
 
 // スマホの描画
-// ここに記述
+glbloader.load(
+  glbUrls[2],
+  function (gltf) {
+    for (let g = 1; g < 10; g++) {
+      model = gltf.scene.clone();
+      model.scale.set(15, 15, 15);
+      model.rotation.set(0, Math.PI / 4, Math.PI / 4);
+      const randomIndex = Math.floor(Math.random() * 3); // 0 、1 、2 のランダム
+      model.position.set(course[randomIndex], 2, -10 * g);
+      phone_list.push(model); // オブジェクトのバウンディングボックスを計算
+      scene.add(model);
+    }
+  },
+  undefined,
+  function (error) {
+    console.error(error);
+  }
+);
 
 // 障害物の描画
 for (let g = 1; g < 12; g++) {
@@ -168,7 +207,23 @@ textureloader.load(
 );
 
 // ゴールの描画
-// ここに記述
+textureloader.load(
+  textureUrls[1],
+  function (texture) {
+    geometry = new BoxGeometry(24, 10, 0.5); // 地面のジオメトリを作成 (BoxGeometry)
+    sphereMaterial = new MeshPhongMaterial();
+    sphereMaterial.map = texture;
+    goal = new Mesh(geometry, sphereMaterial); // メッシュを作成 (ジオメトリ + マテリアル)
+    goal.position.set(0, 5, -200);
+    goalBoundingBox = new Box3().setFromObject(goal);
+    // ground.receiveShadow = true; // 影を受け取る設定
+    scene.add(goal);
+  },
+  undefined,
+  function (error) {
+    console.error(error);
+  }
+);
 
 // センサの値の読み取り
 document.addEventListener("DOMContentLoaded", function () {
@@ -178,10 +233,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // 加速度センサの値の取得
   if (ios) {
     // iOS の時
-    // ここに追加
+    window.addEventListener("devicemotion", (dat) => {
+      aX = dat.accelerationIncludingGravity.x || 0;
+      aY = dat.accelerationIncludingGravity.y || 0;
+      aZ = dat.accelerationIncludingGravity.z || 0;
+    });
   } else {
     // android の時
-    // ここに追加
+    window.addEventListener("devicemotion", (dat) => {
+      aX = -dat.accelerationIncludingGravity.x || 0;
+      aY = -dat.accelerationIncludingGravity.y || 0;
+      aZ = -dat.accelerationIncludingGravity.z || 0;
+    });
   }
 
   // 一度だけ実行
@@ -191,11 +254,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ジャイロセンサの値の取得
-  // ここに追加
+  window.addEventListener(
+    "deviceorientation",
+    (event) => {
+      alpha = event.alpha || 0;
+      beta = event.beta || 0;
+      gamma = event.gamma || 0;
+      console.log("Gyro:", alpha, beta, gamma);
+    },
+    false
+  );
 
   // 一定時間ごとに
   let graphtimer = window.setInterval(() => {
-    // ここに追加
+    displayData();
   }, 33);
 
   // 描画する関数
@@ -225,7 +297,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // プレイヤーの移動
 function move() {
-  // ここに追加
+  player.position.z -= 0.2;
+  if (gamma > 20) {
+    index += 1;
+    player.position.x = course[index];
+  } else if (gamma < -20) {
+    index -= 1;
+    player.position.x = course[index];
+  }
 }
 
 // プレイヤーのジャンプ
@@ -270,21 +349,21 @@ function collision() {
 function animate() {
   const animationId = requestAnimationFrame(animate);
 
-  if (player){
-    // Mixer
-    // ここに追加
+  // Mixer
+  if (mixer) {
+    mixer.update(0.01); // 時間の経過量
+  }
 
+  if (player) {
     // 移動関数の実行
-    // ここに追加
-
+    move();
     // ジャンプ関数の実行
     // ここに追加
-
     // 衝突判定関数の実行
     // ここに追加
-
     // カメラの移動
-    // ここに追加
+    camera.position.set(0, 8, player.position.z + 10);
+    camera.lookAt(new Vector3(0, 5, player.position.z));
   }
   renderer.render(scene, camera);
 }
