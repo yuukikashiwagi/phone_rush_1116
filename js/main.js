@@ -29,22 +29,26 @@ const gravity = 0.05; // 重力
 let isOnce = false;
 let ios = true;
 
-// プレイヤーの変数定数を宣言
+// オブジェクト
 let geometry;
 let sphereMaterial;
 let model;
 let helper;
+
+// プレイヤーの変数定数を宣言
 let player;
 let playerBox;
-let goalBoundingBox;
 let player_v_y = 0;
 const initial_velocity = 0.8;
 let isJumping = false;
 let isMoving = false;
-let goal;
 let box_X;
 let box_Y;
 let box_Z;
+
+// ゴール
+let goal;
+let goalBoundingBox;
 
 // センサ
 let alpha;
@@ -244,7 +248,7 @@ function collision() {
   );
   playerBox.updateWorldMatrix(true, true);
   const playerBoundingBox = new Box3().setFromObject(playerBox);
-  const helper = new Box3Helper(playerBoundingBox, 0xff0000);
+  helper = new Box3Helper(playerBoundingBox, 0xff0000);
   scene.add(helper);
 
   // 障害物との衝突
@@ -266,21 +270,22 @@ function collision() {
 function animate() {
   const animationId = requestAnimationFrame(animate);
 
-  // Mixer
-  // ここに追加
+  if (player){
+    // Mixer
+    // ここに追加
 
-  // 移動関数の実行
-  // ここに追加
+    // 移動関数の実行
+    // ここに追加
 
-  // ジャンプ関数の実行
-  // ここに追加
+    // ジャンプ関数の実行
+    // ここに追加
 
-  // 衝突判定関数の実行
-  // ここに追加
+    // 衝突判定関数の実行
+    // ここに追加
 
-  // カメラの移動
-  // ここに追加
-
+    // カメラの移動
+    // ここに追加
+  }
   renderer.render(scene, camera);
 }
 
