@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 一定時間ごとに
   let graphtimer = window.setInterval(() => {
-    displayData();
+    // displayData();
   }, 33);
 
   // 描画する関数
