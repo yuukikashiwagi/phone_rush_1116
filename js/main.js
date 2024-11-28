@@ -227,8 +227,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // 一度だけ実行
   if (!isOnce) {
     const handleDeviceMotion = (dat) => {
-      aZ = dat.accelerationIncludingGravity.z;
-      if (aZ > 0) {
+      firstZ = dat.accelerationIncludingGravity.z;
+      if (firstZ > 0) {
         ios = false;
       }
       isOnce = true;
@@ -293,8 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "aZ" +
       aZ +
       "<br>" +
-      ios +
-      aZ;
+      ios;
   }
 });
 
