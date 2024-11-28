@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
       aZ +
       "<br>" +
       ios +
-      debug;
+      aZ;
   }
 });
 
