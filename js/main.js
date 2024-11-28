@@ -230,6 +230,12 @@ document.addEventListener("DOMContentLoaded", function () {
   (aX = 0), (aY = 0), (aZ = 0);
   (alpha = 0), (beta = 0), (gamma = 0);
 
+  // 一度だけ実行
+  if (!isOnce) {
+    iosOrAndrooid(aX, aY, aZ);
+    isOnce = true;
+  }
+
   // 加速度センサの値の取得
   if (ios) {
     // iOS の時
@@ -245,12 +251,6 @@ document.addEventListener("DOMContentLoaded", function () {
       aY = -dat.accelerationIncludingGravity.y || 0;
       aZ = -dat.accelerationIncludingGravity.z || 0;
     });
-  }
-
-  // 一度だけ実行
-  if (!isOnce) {
-    iosOrAndrooid(aX, aY, aZ);
-    isOnce = true;
   }
 
   // ジャイロセンサの値の取得
