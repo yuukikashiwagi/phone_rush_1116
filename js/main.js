@@ -62,6 +62,7 @@ let debug;
 let phone_list = [];
 let enemy_list = [];
 
+let firstZ;
 // シーン
 const scene = new Scene();
 // カメラ
@@ -293,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "aZ" +
       aZ +
       "<br>" +
-      ios + 
+      ios +
       firstZ;
   }
 });
