@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 一度だけ実行
   if (!isOnce) {
-    window.addEventListener("devicemotion", (dat) => {
+    const handleDeviceMotion = (dat) => {
       aX = dat.accelerationIncludingGravity.x;
       aY = dat.accelerationIncludingGravity.y;
       aZ = dat.accelerationIncludingGravity.z;
@@ -236,7 +236,9 @@ document.addEventListener("DOMContentLoaded", function () {
         ios = false;
       }
       isOnce = true;
-    });
+      window.removeEventListener("devicemotion", handleDeviceMotion); // リスナーを解除
+    };
+    window.addEventListener("devicemotion", handleDeviceMotion);
   }
 
   // 加速度センサの値の取得
