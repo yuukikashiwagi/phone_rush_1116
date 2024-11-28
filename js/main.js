@@ -293,7 +293,8 @@ document.addEventListener("DOMContentLoaded", function () {
       "aZ" +
       aZ +
       "<br>" +
-      ios;
+      ios + 
+      firstZ;
   }
 });
 
