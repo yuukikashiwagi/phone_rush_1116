@@ -90,14 +90,6 @@ const light = new DirectionalLight(0xffffff, 1);
 light.position.set(10, 10, 10);
 scene.add(light);
 
-function iosOrAndrooid(aX, aY, aZ) {
-  let crossProduct = aX * aY;
-  debug = crossProduct * aZ;
-  if (crossProduct * aZ > 0) {
-    ios = false;
-  }
-}
-
 // texture 内に保存されている jpg のパス
 const textureUrls = [
   "textures/ground.jpg", // 道
@@ -239,7 +231,11 @@ document.addEventListener("DOMContentLoaded", function () {
       aY = dat.accelerationIncludingGravity.y || 0;
       aZ = dat.accelerationIncludingGravity.z || 0;
     });
-    iosOrAndrooid(aX, aY, aZ);
+    let crossProduct = aX * aY;
+    debug = crossProduct * aZ;
+    if (crossProduct * aZ < 0) {
+      ios = false;
+    }
     isOnce = true;
   }
 
