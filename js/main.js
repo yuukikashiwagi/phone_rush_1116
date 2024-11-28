@@ -294,8 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "aZ" +
       aZ +
       "<br>" +
-      ios +
-      firstZ;
+      ios;
   }
 });
 
