@@ -58,6 +58,7 @@ let aX;
 let aY;
 let aZ;
 
+let debug;
 let phone_list = [];
 let enemy_list = [];
 
@@ -91,6 +92,7 @@ scene.add(light);
 
 function iosOrAndrooid(aX, aY, aZ) {
   let crossProduct = aX * aY;
+  debug = crossProduct * aZ;
   if (crossProduct * aZ > 0) {
     ios = false;
   }
@@ -232,6 +234,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 一度だけ実行
   if (!isOnce) {
+    window.addEventListener("devicemotion", (dat) => {
+      aX = dat.accelerationIncludingGravity.x || 0;
+      aY = dat.accelerationIncludingGravity.y || 0;
+      aZ = dat.accelerationIncludingGravity.z || 0;
+    });
     iosOrAndrooid(aX, aY, aZ);
     isOnce = true;
   }
@@ -292,7 +299,8 @@ document.addEventListener("DOMContentLoaded", function () {
       "aZ" +
       aZ +
       "<br>" +
-      ios;
+      ios +
+      debug;
   }
 });
 
