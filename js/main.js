@@ -227,12 +227,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // 一度だけ実行
   if (!isOnce) {
     const handleDeviceMotion = (dat) => {
-      aX = dat.accelerationIncludingGravity.x;
-      aY = dat.accelerationIncludingGravity.y;
       aZ = dat.accelerationIncludingGravity.z;
-      let crossProduct = aX * aY;
-      debug = crossProduct * aZ;
-      if (crossProduct * aZ < 0) {
+      if (aZ > 0) {
         ios = false;
       }
       isOnce = true;
