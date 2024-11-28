@@ -249,9 +249,9 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     // android の時
     window.addEventListener("devicemotion", (dat) => {
-      aX = -dat.accelerationIncludingGravity.x || 0;
-      aY = -dat.accelerationIncludingGravity.y || 0;
-      aZ = -dat.accelerationIncludingGravity.z || 0;
+      aX = -1 * dat.accelerationIncludingGravity.x || 0;
+      aY = -1 * dat.accelerationIncludingGravity.y || 0;
+      aZ = -1 * dat.accelerationIncludingGravity.z || 0;
     });
   }
 
