@@ -227,16 +227,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // 一度だけ実行
   if (!isOnce) {
     window.addEventListener("devicemotion", (dat) => {
-      aX = dat.accelerationIncludingGravity.x || 0;
-      aY = dat.accelerationIncludingGravity.y || 0;
-      aZ = dat.accelerationIncludingGravity.z || 0;
+      aX = dat.accelerationIncludingGravity.x;
+      aY = dat.accelerationIncludingGravity.y;
+      aZ = dat.accelerationIncludingGravity.z;
+      let crossProduct = aX * aY;
+      debug = crossProduct * aZ;
+      if (crossProduct * aZ < 0) {
+        ios = false;
+      }
+      isOnce = true;
     });
-    let crossProduct = aX * aY;
-    debug = crossProduct * aZ;
-    if (crossProduct * aZ < 0) {
-      ios = false;
-    }
-    isOnce = true;
   }
 
   // 加速度センサの値の取得
