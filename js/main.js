@@ -291,7 +291,8 @@ document.addEventListener("DOMContentLoaded", function () {
       "<br>" +
       "aZ" +
       aZ +
-      "<br>";
+      "<br>" +
+      ios;
   }
 });
 
