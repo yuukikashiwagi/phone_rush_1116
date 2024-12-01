@@ -235,23 +235,22 @@ document.addEventListener("DOMContentLoaded", function () {
       window.removeEventListener("devicemotion", handleDeviceMotion); // リスナーを解除
     };
     window.addEventListener("devicemotion", handleDeviceMotion);
-  }
-
-  // 加速度センサの値の取得
-  if (ios && isOnce) {
-    // iOS の時
-    window.addEventListener("devicemotion", (dat) => {
-      aX = dat.accelerationIncludingGravity.x || 0;
-      aY = dat.accelerationIncludingGravity.y || 0;
-      aZ = dat.accelerationIncludingGravity.z || 0;
-    });
-  } else if (!ios && isOnce) {
-    // android の時
-    window.addEventListener("devicemotion", (dat) => {
-      aX = -1 * dat.accelerationIncludingGravity.x || 0;
-      aY = -1 * dat.accelerationIncludingGravity.y || 0;
-      aZ = -1 * dat.accelerationIncludingGravity.z || 0;
-    });
+    // 加速度センサの値の取得
+    if (ios) {
+      // iOS の時
+      window.addEventListener("devicemotion", (dat) => {
+        aX = dat.accelerationIncludingGravity.x || 0;
+        aY = dat.accelerationIncludingGravity.y || 0;
+        aZ = dat.accelerationIncludingGravity.z || 0;
+      });
+    } else if (!ios) {
+      // android の時
+      window.addEventListener("devicemotion", (dat) => {
+        aX = -1 * dat.accelerationIncludingGravity.x || 0;
+        aY = -1 * dat.accelerationIncludingGravity.y || 0;
+        aZ = -1 * dat.accelerationIncludingGravity.z || 0;
+      });
+    }
   }
 
   // ジャイロセンサの値の取得
