@@ -238,14 +238,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 加速度センサの値の取得
-  if (ios) {
+  if (ios && isOnce) {
     // iOS の時
     window.addEventListener("devicemotion", (dat) => {
       aX = dat.accelerationIncludingGravity.x || 0;
       aY = dat.accelerationIncludingGravity.y || 0;
       aZ = dat.accelerationIncludingGravity.z || 0;
     });
-  } else {
+  } else if (!ios && isOnce) {
     // android の時
     window.addEventListener("devicemotion", (dat) => {
       aX = -1 * dat.accelerationIncludingGravity.x || 0;
