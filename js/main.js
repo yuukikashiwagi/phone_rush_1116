@@ -248,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
       aZ = -1 * dat.accelerationIncludingGravity.z || 0;
     }
   });
+  
   // ジャイロセンサの値の取得
   window.addEventListener(
     "deviceorientation",
